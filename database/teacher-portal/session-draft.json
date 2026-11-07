@@ -1,0 +1,52 @@
+[
+  {
+    "teacherId": 2,
+    "draft": {
+      "teacherName": "Mariam Abushiha",
+      "date": "15 May 2026",
+      "schoolName": "Ism",
+      "grade": "G7",
+      "timeSlots": [
+        "14:30",
+        "15:00",
+        "16:00",
+        "17:30"
+      ],
+      "subject": "Math",
+      "classroom": "At home",
+      "tutoringType": "Group",
+      "students": [
+        "Areen Aoun",
+        "Areen kabar",
+        "Zakaria Al Hamdi"
+      ],
+      "hours": {
+        "Areen Aoun": 2,
+        "Areen kabar": 2,
+        "Zakaria Al Hamdi": 2
+      },
+      "grades": {
+        "Areen Aoun": "Excellent",
+        "Areen kabar": "Fair",
+        "Zakaria Al Hamdi": "Fair"
+      },
+      "participation": {
+        "Areen Aoun": "Active",
+        "Areen kabar": "Passive",
+        "Zakaria Al Hamdi": "Moderate"
+      },
+      "absentFlags": {
+        "Areen Aoun": false,
+        "Areen kabar": false,
+        "Zakaria Al Hamdi": false
+      },
+      "draftFlags": {
+        "Areen Aoun": false,
+        "Areen kabar": false,
+        "Zakaria Al Hamdi": false
+      },
+      "note": "",
+      "lastUpdate": "2026-05-15T15:52:21.831Z"
+    }
+  }
+]

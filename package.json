@@ -1,0 +1,35 @@
+{
+  "name": "MasterMindTypeScript",
+  "version": "2.0.0",
+  "description": "MasterMindHTML_2.0 converted to TypeScript — same concept, same localhost server (mastermind.ly), same Bootstrap, same login portals, compiled before serving.",
+  "main": "dist/Server/server.js",
+  "private": true,
+  "scripts": {
+    "build": "npm run sync && npm run build:client && npm run build:server && npm run gen-pages",
+    "build:client": "tsc -p tsconfig.client.json",
+    "build:server": "tsc -p tsconfig.server.json",
+    "sync": "node scripts/sync-static.ts",
+    "gen-pages": "node scripts/generate-pages.ts",
+    "start": "npm run build && node dist/Server/server.js",
+    "serve": "node dist/Server/server.js",
+    "watch:client": "tsc -p tsconfig.client.json --watch",
+    "watch:server": "tsc -p tsconfig.server.json --watch",
+    "typecheck": "npm run typecheck:client && npm run typecheck:server && npm run typecheck:scripts",
+    "typecheck:client": "tsc -p tsconfig.client.json --noEmit",
+    "typecheck:server": "tsc -p tsconfig.server.json --noEmit",
+    "typecheck:scripts": "tsc -p scripts/tsconfig.json"
+  },
+  "dependencies": {
+    "dns2": "^2.0.2",
+    "express": "^4.22.3",
+    "multer": "^2.5.0",
+    "multicast-dns": "^7.2.5"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.4"
+  },
+  "license": "ISC"
+}

@@ -1,0 +1,370 @@
+[
+  {
+    "id": 1,
+    "firstName": "Yassmin",
+    "lastName": "Naas",
+    "phoneNumber": "218 92-8013007",
+    "email": "Yassminnaas@gmail.com",
+    "salary": "0",
+    "notes": "",
+    "subjects": [],
+    "password": "12345",
+    "cutRate": "65"
+  },
+  {
+    "id": 2,
+    "firstName": "Mariam",
+    "lastName": "Abushiha",
+    "phoneNumber": "+218 92-8389967",
+    "email": "mariamabushiha@gmail.com",
+    "salary": "0",
+    "notes": "up to grade 12 send materials",
+    "subjects": [
+      "Math",
+      "Math f",
+      "Math Ol"
+    ],
+    "password": "Monday20151",
+    "cutRate": "40"
+  },
+  {
+    "id": 3,
+    "firstName": "Mohammed",
+    "lastName": "Elharris",
+    "phoneNumber": "+218 92-2719108",
+    "email": "mo.adelelharris@gmail.com",
+    "salary": "0",
+    "notes": "ME:yes",
+    "subjects": [
+      "Biology Hl",
+      "Biology Ol",
+      "Chemistry Hl",
+      "Chemistry Ol",
+      "Physics OL",
+      "Science"
+    ],
+    "password": "092123mohammed",
+    "cutRate": "40"
+  },
+  {
+    "id": 6,
+    "firstName": "Tajouri",
+    "lastName": "Altajouri",
+    "phoneNumber": "+218 92-3030654",
+    "email": "Abdulrahman.anower.tj@gmail.com",
+    "salary": "0",
+    "notes": "gr10-12",
+    "subjects": [
+      "Biology Hl",
+      "Biology Ol",
+      "Chemistry Hl",
+      "Chemistry Ol",
+      "Physics Hl",
+      "Physics OL"
+    ],
+    "password": "tajourimastermind",
+    "cutRate": "40"
+  },
+  {
+    "id": 7,
+    "firstName": "Ahmed",
+    "lastName": "Said",
+    "phoneNumber": "+218 93-5808084",
+    "email": "ahmedsaed9@outlook.com",
+    "salary": "0",
+    "notes": "ME:",
+    "subjects": [
+      "Accounting Ol",
+      "Business",
+      "Business Hl",
+      "Business OL",
+      "Economics Hl",
+      "Economics Ol",
+      "Geography",
+      "History"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 8,
+    "firstName": "Zohaib",
+    "lastName": "Ayyaz",
+    "phoneNumber": "+218 92-3061868",
+    "email": "zohaib_ayya3@yahoo.com",
+    "salary": "0",
+    "notes": "can do all grades",
+    "subjects": [
+      "Biology Hl",
+      "Biology Ol",
+      "Chemistry Hl",
+      "Chemistry Ol",
+      "English",
+      "English Hl",
+      "English Ol",
+      "Geography",
+      "Geography Hl",
+      "Geography Ol",
+      "History",
+      "History Hl",
+      "History Ol",
+      "Physics Hl",
+      "Science"
+    ],
+    "password": "518633ABCDe",
+    "cutRate": "40"
+  },
+  {
+    "id": 9,
+    "firstName": "Rahaf",
+    "lastName": "Bensaleh",
+    "phoneNumber": "+218 91-2650569",
+    "email": "yourahefgaw185@gmail.com",
+    "salary": "0",
+    "notes": "grades1-6",
+    "subjects": [
+      "English",
+      "Geography",
+      "History",
+      "Math",
+      "Science"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 11,
+    "firstName": "Randa",
+    "lastName": "Ben Naji",
+    "phoneNumber": "+218 91-96226353",
+    "email": "randajoma666@gmail.com",
+    "salary": "0",
+    "notes": "",
+    "subjects": [
+      "Biology Hl",
+      "Biology Ol",
+      "Chemistry Hl",
+      "Chemistry Ol",
+      "Science"
+    ],
+    "password": "Randa12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 13,
+    "firstName": "Sarah",
+    "lastName": "Atajouri",
+    "phoneNumber": "+218 91-7259110",
+    "email": "Ms.altajouri@gmail.com",
+    "salary": "0",
+    "notes": "g4-8 all subs no busines g9 geo,history, science, maths depends b",
+    "subjects": [
+      "English",
+      "Geography",
+      "History",
+      "Math",
+      "Math f",
+      "Science"
+    ],
+    "password": "12345",
+    "cutRate": "45"
+  },
+  {
+    "id": 14,
+    "firstName": "Tasneem",
+    "lastName": "Najy",
+    "phoneNumber": "0930228178",
+    "email": "tasneemnajy253@gmail.com",
+    "salary": "0",
+    "notes": "",
+    "subjects": [
+      "English"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 15,
+    "firstName": "Sajida",
+    "lastName": "Hatush",
+    "phoneNumber": "0916751549",
+    "email": "sajhatush@gmail.com",
+    "salary": "0",
+    "notes": "For Math from g5 till below, chem+Bio From G7-12",
+    "subjects": [
+      "Biology Ol",
+      "Chemistry Ol",
+      "Math",
+      "Science"
+    ],
+    "password": "ISM2025",
+    "cutRate": "40"
+  },
+  {
+    "id": 16,
+    "firstName": "Arif",
+    "lastName": "Al-mgherby",
+    "phoneNumber": "+218 93-1200881",
+    "email": "ask@him.com",
+    "salary": "40",
+    "notes": "",
+    "subjects": [
+      "Business",
+      "Business Hl",
+      "Business OL",
+      "Economics Hl",
+      "Economics Ol",
+      "English",
+      "Geography",
+      "Geography Hl",
+      "Geography Ol",
+      "History",
+      "History Hl",
+      "History Ol"
+    ],
+    "password": "12345"
+  },
+  {
+    "id": 17,
+    "firstName": "Abdulsalam",
+    "lastName": "Aqeel",
+    "phoneNumber": "+218 92-56819859",
+    "email": "abdulslamloaqeel@gmail.com",
+    "salary": "0",
+    "notes": "ME:yes",
+    "subjects": [
+      "ICT",
+      "Math",
+      "Math f",
+      "Math Hl",
+      "Math Ol"
+    ],
+    "password": "0925819859A",
+    "cutRate": "40"
+  },
+  {
+    "id": 18,
+    "firstName": "Mohammed",
+    "lastName": "Elmuradi",
+    "phoneNumber": "+218 93-1955429",
+    "email": "elmuradiom@gmail.com",
+    "salary": "0",
+    "notes": "ME: depending on location",
+    "subjects": [
+      "Accounting Ol",
+      "Business",
+      "Business Hl",
+      "Business OL",
+      "Math",
+      "Math f",
+      "Math Ol"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 19,
+    "firstName": "Ahmed",
+    "lastName": "Abdulmajid younes",
+    "phoneNumber": "+218 94-4795885",
+    "email": "ahmedalghariawo@gmail.com",
+    "salary": "0",
+    "notes": "g7-12/ He can't work at Thursday's",
+    "subjects": [
+      "Math",
+      "Math f",
+      "Math Hl",
+      "Math Ol",
+      "Physics Hl",
+      "Physics OL"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 20,
+    "firstName": "Feras",
+    "lastName": "khbezat",
+    "phoneNumber": "+218 94-0171617",
+    "email": "ferassalahk@gmail.com",
+    "salary": "0",
+    "notes": "idk update it",
+    "subjects": [
+      "Math"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 21,
+    "firstName": "Mohammed",
+    "lastName": "Elmuradi",
+    "phoneNumber": "+218 93-1955429",
+    "email": "elmuradiom@gmail.com",
+    "salary": "0",
+    "notes": "ME:depending on location",
+    "subjects": [
+      "Accounting Ol",
+      "Business",
+      "Business Hl",
+      "Business OL",
+      "English",
+      "English Hl",
+      "English Ol",
+      "Geography Ol",
+      "Math",
+      "Math f",
+      "Math Ol",
+      "Science"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 22,
+    "firstName": "Tayseer",
+    "lastName": "Al-shwige",
+    "phoneNumber": "0917308898",
+    "email": "Tayseernoemail@gmail",
+    "salary": "0",
+    "notes": "",
+    "subjects": [
+      "Business",
+      "Economics Hl",
+      "Economics Ol"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 23,
+    "firstName": "Ahmouda",
+    "lastName": "Masoud",
+    "phoneNumber": "0946848023",
+    "email": "Lookihmooda@gmail.com",
+    "salary": "0",
+    "notes": "",
+    "subjects": [
+      "Economics Hl",
+      "Economics Ol"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  },
+  {
+    "id": 24,
+    "firstName": "Omar",
+    "lastName": "Eludia",
+    "phoneNumber": "0913439297",
+    "email": "omar.m.eludai@gmail.com",
+    "salary": "0",
+    "notes": "",
+    "subjects": [
+      "English",
+      "English Hl",
+      "English Ol"
+    ],
+    "password": "12345",
+    "cutRate": "40"
+  }
+]

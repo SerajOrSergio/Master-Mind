@@ -1,0 +1,40 @@
+{
+  "classrooms": [
+    {
+      "id": 1,
+      "classroom_name": "classroom 1",
+      "color": "white"
+    },
+    {
+      "id": 2,
+      "classroom_name": "classroom 2",
+      "color": "blue"
+    },
+    {
+      "id": 3,
+      "classroom_name": "classroom 3",
+      "color": "#ff0000"
+    },
+    {
+      "id": 4,
+      "classroom_name": "classroom 4",
+      "color": "#00ff4c"
+    },
+    {
+      "id": 7,
+      "classroom_name": "Private",
+      "color": "#808080"
+    },
+    {
+      "id": 5,
+      "classroom_name": "Online",
+      "color": "#808080"
+    },
+    {
+      "id": 6,
+      "classroom_name": "At home",
+      "color": "#808080"
+    }
+  ],
+  "darkMode": true
+}

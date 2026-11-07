@@ -1,0 +1,17 @@
+// Build scripts (sync-static.ts, generate-pages.ts) also run under Node.js
+// type-stripping and are shipped as TypeScript sources. Excluding the folder
+// from the main client project changes nothing about that; this tiny config
+// just keeps the editor checks green for plain Node APIs here.
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2022"],
+    "types": ["node"],
+    "noEmit": true,
+    "strict": false,
+    "skipLibCheck": true
+  },
+  "include": ["*.ts"]
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ES2020",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "outDir": "dist",
+    "rootDir": ".",
+    "esModuleInterop": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": false,
+    "paths": {
+      "/assist/*": ["./assist/*"],
+      "/src/*": ["./src/*"],
+      "/database/*": ["./database/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "assist/pwa-register.ts", "assist/use-hostname.ts", "assist/undo-manager.ts", "assist/sw.ts", "assist/page-boot.ts", "assist/main-content.ts"]
+}

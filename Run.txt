@@ -1,0 +1,43 @@
+MasterMindTypeScript_2.0 - how to run
+=====================================
+
+Same concept as MasterMindHTML_2.0 (Bootstrap UI, localhost server named
+mastermind.ly / mastermind.local, login portals, same APIs and JSON database),
+but every JS file is now real TypeScript compiled to dist/ before serving.
+
+One-time setup:
+  npm install
+
+Build + run:
+  npm run build       (compiles client + server TypeScript into dist/)
+  npm start           (same as build + node dist/Server/server.js)
+
+Quick serve after a first build:
+  npm run serve       (node dist/Server/server.js without rebuilding)
+
+Windows double-click:
+  start-server.bat            (runs the already-built dist/ instantly - no build;
+                               auto-restarts on crash)
+  start-server-admin.bat      (as Administrator - also enables the DNS responder
+                               on port 53 for mastermind.ly on phones)
+
+Local host names (unchanged from the original):
+  http://mastermind.ly/       primary name  (needs DNS responder / router DNS)
+  http://mastermind.local/    mDNS fallback - use this for iPhone home-screen icons
+  http://localhost/           local testing
+
+Useful commands:
+  npm run typecheck           TypeScript diagnostics for client + server
+  npm run watch:client        recompile client TS on every save
+  npm run watch:server        recompile server TS on every save
+
+Where things live:
+  Server/            server TypeScript sources (compiled to dist/Server)
+  src/               ONE source of truth: every page/style is pure TypeScript
+                     (*-template.ts / *-styles.ts compiled to dist/, and the
+                     build regenerates the browser-facing .html/.css from them)
+  src/assets         images and PWA icons (synced to dist/src by the build)
+  src/types/models.ts shared typed data models (Student, Teacher, Payment, ...)
+  scripts/           build scripts, also TypeScript (sync-static.ts,
+                     generate-pages.ts)
+  dist/              generated at build time - everything served from here

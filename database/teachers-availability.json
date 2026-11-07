@@ -1,0 +1,392 @@
+[
+  {
+    "teacherId": "4",
+    "teacherName": "Feras Taher",
+    "subject": [
+      "Biology Ol",
+      "Biology Hl",
+      "Physics OL",
+      "Physics Hl"
+    ],
+    "gradeFrom": "G10",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "monday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "tuesday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "thursday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "friday": {
+        "hours": "16:00 - 21:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "16:00 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "",
+    "id": 2
+  },
+  {
+    "teacherId": "2",
+    "teacherName": "Mariam Abushiha",
+    "subject": [
+      "Math Ol",
+      "Math f",
+      "Biology Ol",
+      "Science",
+      "Math"
+    ],
+    "gradeFrom": "G1",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "sunday": {
+        "hours": "16:00 - 20:00",
+        "status": "available"
+      },
+      "monday": {
+        "hours": "16:00 - 20:00",
+        "status": "available"
+      },
+      "tuesday": {
+        "hours": "16:00 - 20:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "16:00 - 20:00",
+        "status": "available"
+      },
+      "thursday": {
+        "hours": "16:00 - 20:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "16:00 - 20:00",
+        "status": "available"
+      }
+    },
+    "note": "just let her know the day before ",
+    "id": 3
+  },
+  {
+    "teacherId": "3",
+    "teacherName": "Mohammed Elharris",
+    "subject": [
+      "Biology Hl",
+      "Chemistry Hl",
+      "Physics Hl",
+      "Science",
+      "Math"
+    ],
+    "gradeFrom": "G1",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "sunday": {
+        "hours": "14:00 - 21:00",
+        "status": "available"
+      },
+      "monday": {
+        "hours": "14:00 - 21:00",
+        "status": "available"
+      },
+      "tuesday": {
+        "hours": "14:00 - 21:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "14:00 - 21:00",
+        "status": "available"
+      },
+      "thursday": {
+        "hours": "14:00 - 21:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "10:00 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "math up until g6",
+    "id": 4
+  },
+  {
+    "teacherId": "9",
+    "teacherName": "Rahaf Bensaleh",
+    "subject": [
+      "Science",
+      "Geography",
+      "History",
+      "Math",
+      "English"
+    ],
+    "gradeFrom": "G1",
+    "gradeTo": "G6",
+    "weeklySchedule": {},
+    "note": "",
+    "id": 5
+  },
+  {
+    "teacherId": "13",
+    "teacherName": "Sarah Atajouri",
+    "subject": [
+      "Math f",
+      "Science",
+      "Geography",
+      "History",
+      "Math",
+      "English"
+    ],
+    "gradeFrom": "G4",
+    "gradeTo": "G9",
+    "weeklySchedule": {
+      "monday": {
+        "hours": "16:00 - 19:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "16:00 - 19:00",
+        "status": "available"
+      }
+    },
+    "note": "before magrib works there days two days fixed third text her the day be4",
+    "id": 6
+  },
+  {
+    "teacherId": "11",
+    "teacherName": "Randa Ben Naji",
+    "subject": [
+      "Biology Ol",
+      "Biology Hl",
+      "Chemistry Ol",
+      "Chemistry Hl",
+      "Science"
+    ],
+    "gradeFrom": "G7",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "saturday": {
+        "hours": "10:00 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "call day be4 for other classes but mostly available ",
+    "id": 7
+  },
+  {
+    "teacherId": "8",
+    "teacherName": "Zohaib Ayyaz",
+    "subject": [
+      "Biology Ol",
+      "Biology Hl",
+      "Chemistry Ol",
+      "Chemistry Hl",
+      "Physics OL",
+      "Physics Hl",
+      "English Hl",
+      "Geography Hl",
+      "Science",
+      "Geography"
+    ],
+    "gradeFrom": "G1",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "sunday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "monday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "tuesday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "thursday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "friday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "10:00 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "can do basically everything but maths available most of the time",
+    "id": 8
+  },
+  {
+    "teacherId": "17",
+    "teacherName": "Abdulsalam Aqeel",
+    "subject": [
+      "Math Ol",
+      "Math Hl",
+      "Math f",
+      "ICT"
+    ],
+    "gradeFrom": "G1",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "sunday": {
+        "hours": "18:00 - 21:00",
+        "status": "available"
+      },
+      "monday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "tuesday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "thursday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "15:30 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "text him the day be4 ME:yes",
+    "id": 9
+  },
+  {
+    "teacherId": "16",
+    "teacherName": "Arif Al-mgherby",
+    "subject": [
+      "History Ol",
+      "History Hl",
+      "Geography Hl",
+      "Economics Hl",
+      "Business Hl",
+      "Geography",
+      "History",
+      "English",
+      "Business"
+    ],
+    "gradeFrom": "G1",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "sunday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "thursday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "ME: yes good at social media ",
+    "id": 10
+  },
+  {
+    "teacherId": "18",
+    "teacherName": "Mohammed Elmuradi",
+    "subject": [
+      "Accounting Ol",
+      "Math",
+      "English",
+      "Business"
+    ],
+    "gradeFrom": "G1",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "sunday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "monday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "tuesday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "thursday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "15:00 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "",
+    "id": 11
+  },
+  {
+    "teacherId": "19",
+    "teacherName": "Ahmed Abdulmajid younes",
+    "subject": [
+      "Math Ol",
+      "Math Hl",
+      "Math f",
+      "Physics OL",
+      "Physics Hl",
+      "Math"
+    ],
+    "gradeFrom": "G7",
+    "gradeTo": "G12",
+    "weeklySchedule": {
+      "sunday": {
+        "hours": "17:00 - 21:00",
+        "status": "available"
+      },
+      "monday": {
+        "hours": "17:00 - 21:00",
+        "status": "available"
+      },
+      "tuesday": {
+        "hours": "17:00 - 21:00",
+        "status": "available"
+      },
+      "wednesday": {
+        "hours": "17:00 - 21:00",
+        "status": "available"
+      },
+      "saturday": {
+        "hours": "11:00 - 21:00",
+        "status": "available"
+      }
+    },
+    "note": "",
+    "id": 12
+  }
+]

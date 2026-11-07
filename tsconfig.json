@@ -1,0 +1,33 @@
+{
+  // Editor default project: the client (src/ + assist/) side of the app.
+  // This exact file name is what the editor discovers automatically, so every
+  // .ts file gets the correct DOM/ESM/path settings instead of the editor's
+  // fallback defaults (which is where the "red lines everywhere" came from).
+  // Build configs: tsconfig.client.json (keeps building identically) and
+  // tsconfig.server.json (its own Root settings; see Server/tsconfig.json for
+  // the editor project of the server folder).
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "compilerOptions": {
+    "target": "ES2019",
+    "module": "ES2020",
+    "moduleResolution": "Bundler",
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "outDir": "dist",
+    "rootDir": ".",
+    "esModuleInterop": true,
+    "strict": false,
+    "noImplicitAny": false,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "sourceMap": false,
+    // TS5 resolves 'paths' values relative to this tsconfig's folder — same
+    // result as the old "baseUrl": ".", but without the option editors flag.
+    "paths": {
+      "/assist/*": ["./assist/*"],
+      "/src/*": ["./src/*"],
+      "/database/*": ["./database/*"]
+    }
+  },
+  "include": ["src/**/*.ts", "assist/pwa-register.ts", "assist/use-hostname.ts", "assist/undo-manager.ts", "assist/sw.ts", "assist/page-boot.ts", "assist/main-content.ts"],
+  "exclude": ["Server", "node_modules", "scripts", "dist"]
+}

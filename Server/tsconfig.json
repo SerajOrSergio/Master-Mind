@@ -1,0 +1,10 @@
+{
+  // Editor default project for Server/*.ts (the editor picks up the closest
+  // tsconfig.json when opening a file under Server/). Mirrors
+  // tsconfig.server.json, which remains the build configuration.
+  "extends": "../tsconfig.server.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "outDir": "dist"
+  }
+}

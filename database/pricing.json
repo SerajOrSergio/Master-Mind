@@ -1,0 +1,144 @@
+[
+  {
+    "category": "Standard",
+    "pricing": [
+      {
+        "type": "Hourly",
+        "description": "Private",
+        "price": 80,
+        "currency": "LYD"
+      },
+      {
+        "type": "Hourly",
+        "description": "Group",
+        "price": 35,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Group - 8 Classes",
+        "price": 550,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Group - 10 Classes",
+        "price": 650,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Private - 8 Classes",
+        "price": 700,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Private - 10 Classes",
+        "price": 900,
+        "currency": "LYD"
+      },
+      {
+        "type": "Online",
+        "description": "same as above",
+        "price": 0,
+        "currency": "LYD"
+      },
+      {
+        "type": "MasterEilte - Hourly",
+        "description": "Private",
+        "price": 85,
+        "currency": "LYD"
+      },
+      {
+        "type": "MasterEilte - Hourly",
+        "description": "Group",
+        "price": 75,
+        "currency": "LYD"
+      },
+      {
+        "type": "MasterEilte - Monthly",
+        "description": "Group - 8 Classes",
+        "price": 1200,
+        "currency": "LYD"
+      },
+      {
+        "type": "MasterEilte - Monthly",
+        "description": "Group - 10 Classes",
+        "price": 1400,
+        "currency": "LYD"
+      }
+    ]
+  },
+  {
+    "category": "KG - KG6",
+    "pricing": [
+      {
+        "type": "Hourly",
+        "description": "Private",
+        "price": 80,
+        "currency": "LYD"
+      },
+      {
+        "type": "Hourly",
+        "description": "Group",
+        "price": 35,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Group - 8 Classes",
+        "price": 550,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Group - 10 Classes",
+        "price": 650,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Private - 8 Classes",
+        "price": 600,
+        "currency": "LYD"
+      },
+      {
+        "type": "Monthly",
+        "description": "Private - 10 Classes",
+        "price": 750,
+        "currency": "LYD"
+      },
+      {
+        "type": "Online",
+        "description": "same as above",
+        "price": 0,
+        "currency": "LYD"
+      },
+      {
+        "type": "MasterEilte - Hourly",
+        "description": "Private",
+        "price": 75,
+        "currency": "LYD"
+      },
+      {
+        "type": "MasterEilte - Hourly",
+        "description": "Group",
+        "price": 65,
+        "currency": "LYD"
+      },
+      {
+        "type": "MasterEilte - Monthly",
+        "description": "Group - 8 Classes",
+        "price": 1200,
+        "currency": "LYD"
+      },
+      {
+        "type": "Group - 8 Classes",
+        "description": "Group - 10 Classes",
+        "price": 1400,
+        "currency": "LYD"
+      }
+    ]
+  }
+]

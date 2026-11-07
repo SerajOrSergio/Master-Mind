@@ -1,0 +1,118 @@
+[
+  {
+    "id": 1,
+    "name": "Math Ol"
+  },
+  {
+    "id": 2,
+    "name": "Math Hl"
+  },
+  {
+    "id": 3,
+    "name": "Math f"
+  },
+  {
+    "id": 4,
+    "name": "Biology Ol"
+  },
+  {
+    "id": 5,
+    "name": "Biology Hl"
+  },
+  {
+    "id": 6,
+    "name": "Chemistry Ol"
+  },
+  {
+    "id": 7,
+    "name": "Chemistry Hl"
+  },
+  {
+    "id": 8,
+    "name": "Physics OL"
+  },
+  {
+    "id": 9,
+    "name": "Physics Hl"
+  },
+  {
+    "id": 10,
+    "name": "English Ol"
+  },
+  {
+    "id": 11,
+    "name": "English Hl"
+  },
+  {
+    "id": 12,
+    "name": "History Ol"
+  },
+  {
+    "id": 13,
+    "name": "History Hl"
+  },
+  {
+    "id": 14,
+    "name": "Geography Ol"
+  },
+  {
+    "id": 15,
+    "name": "Geography Hl"
+  },
+  {
+    "id": 16,
+    "name": "Accounting Ol"
+  },
+  {
+    "id": 17,
+    "name": "Accounting Hl"
+  },
+  {
+    "id": 18,
+    "name": "Economics Ol"
+  },
+  {
+    "id": 19,
+    "name": "Economics Hl"
+  },
+  {
+    "id": 20,
+    "name": "Business OL"
+  },
+  {
+    "id": 21,
+    "name": "Business Hl"
+  },
+  {
+    "id": 22,
+    "name": "ICT"
+  },
+  {
+    "id": 23,
+    "name": "Science"
+  },
+  {
+    "id": 24,
+    "name": "Arabic"
+  },
+  {
+    "id": 25,
+    "name": "Geography"
+  },
+  {
+    "id": 26,
+    "name": "History"
+  },
+  {
+    "id": 27,
+    "name": "Math"
+  },
+  {
+    "id": 28,
+    "name": "English"
+  },
+  {
+    "id": 29,
+    "name": "Business"
+  }
+]

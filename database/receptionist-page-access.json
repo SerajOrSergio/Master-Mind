@@ -1,0 +1,172 @@
+{
+  "pages": [
+    {
+      "id": "dashboard",
+      "name": "Dashboard",
+      "icon": "bi-speedometer2",
+      "path": "/src/pages/receptionist/dashboard/index.html",
+      "enabled": false,
+      "order": 1
+    },
+    {
+      "id": "teachers-availability",
+      "name": "Teachers availability",
+      "icon": "bi-calendar-check",
+      "path": "/src/pages/receptionist/teachers-availability/index.html",
+      "enabled": true,
+      "order": 2
+    },
+    {
+      "id": "topics",
+      "name": "Topics",
+      "icon": "bi-journal-text",
+      "path": "/src/pages/receptionist/topics/index.html",
+      "enabled": true,
+      "order": 3
+    },
+    {
+      "id": "teachers",
+      "name": "Teachers",
+      "icon": "bi-person-badge",
+      "path": "/src/pages/receptionist/teachers/index.html",
+      "enabled": true,
+      "order": 4
+    },
+    {
+      "id": "subjects",
+      "name": "Subjects",
+      "icon": "bi-book",
+      "path": "/src/pages/receptionist/subjects/index.html",
+      "enabled": false,
+      "order": 5
+    },
+    {
+      "id": "grades",
+      "name": "Grades",
+      "icon": "bi-bar-chart-steps",
+      "path": "/src/pages/receptionist/grades/index.html",
+      "enabled": false,
+      "order": 6
+    },
+    {
+      "id": "students",
+      "name": "Students",
+      "icon": "bi-people",
+      "path": "/src/pages/receptionist/students/index.html",
+      "enabled": true,
+      "order": 7
+    },
+    {
+      "id": "teachers-attendance",
+      "name": "Teachers attendance",
+      "icon": "bi-calendar2-week",
+      "path": "/src/pages/receptionist/teachers-attendance/index.html",
+      "enabled": true,
+      "order": 8
+    },
+    {
+      "id": "session-form",
+      "name": "Session form",
+      "icon": "bi-ui-checks-grid",
+      "path": "/src/pages/receptionist/session-form/index.html",
+      "enabled": true,
+      "order": 9
+    },
+    {
+      "id": "payments",
+      "name": "Payments",
+      "icon": "bi-credit-card",
+      "path": "/src/pages/receptionist/payments/index.html",
+      "enabled": true,
+      "order": 10
+    },
+    {
+      "id": "partial",
+      "name": "Partial",
+      "icon": "bi-cash-coin",
+      "path": "/src/pages/receptionist/partial/partial.html",
+      "enabled": true,
+      "order": 11
+    },
+    {
+      "id": "unpaid",
+      "name": "Unpaid",
+      "icon": "bi-cash",
+      "path": "/src/pages/receptionist/unpaid/unpaid.html",
+      "enabled": true,
+      "order": 12
+    },
+    {
+      "id": "paid",
+      "name": "Paid",
+      "icon": "bi-cash-stack",
+      "path": "/src/pages/receptionist/paid/paid.html",
+      "enabled": true,
+      "order": 13
+    },
+    {
+      "id": "student-absence-logs",
+      "name": "Student absence logs",
+      "icon": "bi-journal-x",
+      "path": "/src/pages/receptionist/student-absence-logs/index.html",
+      "enabled": true,
+      "order": 14
+    },
+    {
+      "id": "pricing",
+      "name": "Pricing",
+      "icon": "bi-currency-dollar",
+      "path": "/src/pages/receptionist/pricing/pricing.html",
+      "enabled": true,
+      "order": 15
+    },
+    {
+      "id": "teacher-absence",
+      "name": "Teacher absence",
+      "icon": "bi-journal-x",
+      "path": "/src/pages/receptionist/teacher-absence/index.html",
+      "enabled": true,
+      "order": 16
+    },
+    {
+      "id": "subscription",
+      "name": "Subscription",
+      "icon": "bi-box-arrow-in-right",
+      "path": "/src/pages/receptionist/subscription/subscription.html",
+      "enabled": true,
+      "order": 17
+    },
+    {
+      "id": "database-download",
+      "name": "Database Download",
+      "icon": "bi-database-down",
+      "path": "/src/pages/admin/database-download/index.html",
+      "enabled": false,
+      "order": 18
+    },
+    {
+      "id": "study-clicks",
+      "name": "Study Clicks",
+      "icon": "bi-mouse2",
+      "path": "/src/pages/receptionist/study-clicks/index.html",
+      "enabled": true,
+      "order": 19
+    },
+    {
+      "id": "student-materials",
+      "name": "Student materials",
+      "icon": "bi-folder2-open",
+      "path": "/src/pages/receptionist/student-materials/index.html",
+      "enabled": true,
+      "order": 20
+    },
+    {
+      "id": "past-papers",
+      "name": "Past Papers",
+      "icon": "bi-file-earmark-text",
+      "path": "/src/pages/receptionist/past-papers/index.html",
+      "enabled": true,
+      "order": 21
+    }
+  ]
+}
