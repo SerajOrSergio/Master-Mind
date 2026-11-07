@@ -37,6 +37,7 @@ export const pageHtml = `
           <div class="col-12 col-md-2 mb-2 mb-md-0"><input type="text" name="schoolName" class="form-control" placeholder="School Name"></div>
           <div class="col-12 col-md-2 mb-2 mb-md-0"><input type="text" name="curriculum" class="form-control" placeholder="Curriculum"></div>
           <!-- Attendance field removed -->
+          <div class="col-12 col-md-2 mb-2 mb-md-0"><input type="text" name="email" class="form-control" placeholder="Email"></div>
           <div class="col-12 col-md-2 mb-2 mb-md-0"><input type="text" name="phoneNumber" class="form-control" placeholder="Phone Number"></div>
           <div class="col-12 col-md-2 mb-2 mb-md-0"><input type="text" name="parentName" class="form-control" placeholder="Parent Name"></div>
           <div class="col-12 col-md-2"><input type="text" name="parentPhone" class="form-control" placeholder="Parent Phone"></div>

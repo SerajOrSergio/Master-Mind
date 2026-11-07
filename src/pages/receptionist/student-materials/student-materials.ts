@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pickerClear.classList.remove('d-none');
     // The moment a student is selected, post their saved info into the form
     document.getElementById('phoneNumber').value = s.phoneNumber || '';
+    document.getElementById('email').value = s.email || '';
     document.getElementById('curriculum').value = s.curriculum || '';
     // Grade: auto-select the matching pill from the grades database
     document.querySelectorAll('#gradesContainer .grade-pill').forEach(p => {
@@ -135,6 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pickerInput.readOnly = false;
     pickerClear.classList.add('d-none');
     document.getElementById('phoneNumber').value = '';
+    document.getElementById('email').value = '';
     document.getElementById('curriculum').value = '';
     document.querySelectorAll('#gradesContainer .grade-pill').forEach(p => p.classList.remove('selected'));
     rec_studm_selectedGrade = '';
@@ -189,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
       studentId: Number(studentId),
       studentName: document.getElementById('studentSearch').value,
       phoneNumber: document.getElementById('phoneNumber').value.trim(),
+      email: document.getElementById('email').value.trim(),
       gradeLevel: rec_studm_selectedGrade,
       curriculum: document.getElementById('curriculum').value.trim(),
       subjects: rec_studm_selectedSubjects
@@ -230,6 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     pickerInput.readOnly = false;
     document.getElementById('studentPickerClear').classList.add('d-none');
     document.getElementById('phoneNumber').value = '';
+    document.getElementById('email').value = '';
     document.getElementById('curriculum').value = '';
     document.querySelectorAll('#gradesContainer .grade-pill').forEach(p => p.classList.remove('selected'));
     rec_studm_selectedGrade = '';
@@ -256,6 +260,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const hay = [
       entry.studentName,
       entry.phoneNumber,
+      entry.email,
       entry.gradeLevel,
       entry.curriculum,
       (entry.subjects || []).join(' '),
@@ -277,6 +282,7 @@ document.addEventListener('DOMContentLoaded', () => {
         <td>${i+1}</td>
         <td class="editable" data-field="studentName" data-id="${m.id}">${m.studentName}</td>
         <td class="editable" data-field="phoneNumber" data-id="${m.id}">${m.phoneNumber}</td>
+        <td class="editable" data-field="email" data-id="${m.id}">${m.email || ''}</td>
         <td class="editable" data-field="gradeLevel" data-id="${m.id}">${m.gradeLevel||''}</td>
         <td class="editable" data-field="curriculum" data-id="${m.id}">${m.curriculum||''}</td>
         <td>${(m.subjects||[]).map(function(subj){ return '<span class="ms-subject-chip">' + ms_table_escape(subj) + '</span>'; }).join('') || '<span class="text-muted">—</span>'}</td>
@@ -564,6 +570,12 @@ document.addEventListener('DOMContentLoaded', () => {
     card.appendChild(top);
     card.appendChild(name);
     if (m.phoneNumber) card.appendChild(phone);
+    if (m.email) {
+      const e = document.createElement('div');
+      e.className = 'book-meta text-muted small';
+      e.innerHTML = `<i class="bi bi-envelope me-1"></i>${m.email}`;
+      card.appendChild(e);
+    }
     if (m.curriculum) {
       const cur = document.createElement('div');
       cur.className = 'book-meta text-muted small';

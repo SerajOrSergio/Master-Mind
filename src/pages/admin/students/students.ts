@@ -102,6 +102,7 @@ function renderStudentsTable(students) {
     { key: 'gradeLevel', label: 'Grade' },
     { key: 'discount', label: 'Discount (%)' },
     { key: 'notes', label: 'Notes' },
+    { key: 'email', label: 'Email' },
     { key: 'phoneNumber', label: 'Phone' },
     { key: 'parentName', label: 'Parent Name' },
     { key: 'parentPhone', label: 'Parent Phone' }
@@ -118,6 +119,7 @@ function renderStudentsTable(students) {
           <th>Grade</th>
           <th>Discount (%)</th>
           <th>Notes</th>
+          <th>Email</th>
           <th>Phone</th>
           <th>Parent Name</th>
           <th>Parent Phone</th>
@@ -505,6 +507,7 @@ async function handleStudentFormSubmit(e) {
     gradeLevel: selectedGrade,
     // attendance removed
     notes: form.notes.value.trim(),
+    email: form.email ? form.email.value.trim() : '',
     phoneNumber: form.phoneNumber.value.trim(),
     parentName: form.parentName.value.trim(),
     parentPhone: form.parentPhone.value.trim(),

@@ -16,6 +16,7 @@ export interface Student {
   grade: string;
   status?: string;
   phone?: string;
+  email?: string;
   notes?: string;
   [key: string]: unknown;
 }
