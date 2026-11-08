@@ -15,8 +15,10 @@ Build + run:
 Quick serve after a first build:
   npm run serve       (node dist/Server/server.js without rebuilding)
 
-Windows double-click:
-  start-server.bat            (runs the already-built dist/ instantly - no build;
+Windows double-click (works straight from a GitHub clone / Download ZIP):
+  start-server.bat            (first run: installs dependencies and builds
+                               dist/ once, automatically, then starts;
+                               later runs: starts instantly, no build;
                                auto-restarts on crash)
   start-server-admin.bat      (as Administrator - also enables the DNS responder
                                on port 53 for mastermind.ly on phones)

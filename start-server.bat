@@ -1,6 +1,9 @@
 @echo off
-REM Starts the local server on the already-compiled dist/ folder — no build,
-REM no dev server, no TypeScript compile. Boots straight into node.
+REM Starts the local server on the compiled dist/ folder.
+REM On a first run (fresh GitHub download / zip) there is no dist/ and no
+REM node_modules/ yet, so this script installs dependencies and builds
+REM once automatically, then boots straight into node. After that,
+REM every later double-click skips straight to node — no build.
 REM The server listens on IPv4 (0.0.0.0) and answers http://mastermind.local
 REM (and the LAN IPv4 link). Port 80 is tried first; if it is taken or needs
 REM admin rights, the server falls back to 8080 / 3000 by itself.
@@ -18,15 +21,66 @@ if /i "%~1"=="--uninstall-startup" goto uninstall_startup
 if /i "%~1"=="--help"              goto show_help
 
 REM The site runs from dist/Server/server.js exactly as it was last built.
-REM Nothing is compiled here, so booting is instant.
-if not exist dist\Server\server.js (
-    echo.
-    echo dist\Server\server.js is missing - this copy has never been built.
-    echo Run  npm run build  once (by hand^), then double-click this file again.
+REM dist/ and node_modules/ are git-ignored, so a fresh GitHub download
+REM (git clone OR the Download ZIP) has neither. Build them once here,
+REM automatically, so the downloaded copy works with no manual steps.
+if not exist dist\Server\server.js goto first_run_build
+goto server_loop
+
+:first_run_build
+echo.
+echo First run on this copy: dist\Server\server.js is missing.
+echo Installing dependencies and building the site (one time only)...
+echo (later double-clicks start instantly - no build.)
+echo.
+where node >nul 2>&1
+if %errorlevel% neq 0 (
+    echo ERROR: Node.js was not found on this PC.
+    echo Install Node.js 20 or newer from https://nodejs.org, then double-click this file again.
     echo.
     pause
     exit /b 1
 )
+node --version
+where npm >nul 2>&1
+if %errorlevel% neq 0 (
+    echo ERROR: npm was not found. Reinstall Node.js from https://nodejs.org - it includes npm.
+    echo.
+    pause
+    exit /b 1
+)
+if not exist node_modules\express\package.json (
+    echo --- npm install ---
+    call npm install
+    if %errorlevel% neq 0 (
+        echo.
+        echo ERROR: npm install failed. Check your internet connection and try again.
+        echo.
+        pause
+        exit /b 1
+    )
+)
+echo --- npm run build ---
+call npm run build
+if %errorlevel% neq 0 (
+    echo.
+    echo ERROR: the build failed - see the messages above.
+    echo Fix the problem and double-click this file again to retry.
+    echo.
+    pause
+    exit /b 1
+)
+if not exist dist\Server\server.js (
+    echo.
+    echo ERROR: the build finished but dist\Server\server.js is still missing.
+    echo.
+    pause
+    exit /b 1
+)
+echo.
+echo Build complete - starting the server...
+echo.
+goto server_loop
 
 REM ------------------------------------------------------------------
 REM Long-term reliability watchdog:
@@ -84,7 +138,7 @@ exit /b
 
 :show_help
 echo Usage:
-echo   start-server.bat                        Run the already-built server now (no build)
+echo   start-server.bat                        Run the server now (first run builds automatically)
 echo   start-server.bat --install-startup      Start the server automatically on boot/logon
 echo   start-server.bat --uninstall-startup    Stop auto-starting the server on boot/logon
 pause
