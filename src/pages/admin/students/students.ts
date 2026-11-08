@@ -128,7 +128,7 @@ function renderStudentsTable(students) {
       </thead>
       <tbody>`;
   if (students.length === 0) {
-    html += `<tr><td colspan="12" class="text-center text-muted">No students found.</td></tr>`;
+    html += `<tr><td colspan="13" class="text-center text-muted">No students found.</td></tr>`;
   } else {
     students.forEach((s, i) => {
       html += `<tr>`;

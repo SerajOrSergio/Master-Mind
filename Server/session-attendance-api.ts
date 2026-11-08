@@ -156,6 +156,11 @@ function writeJson(filePath, data) {
   writeJsonSafe(filePath, data);
 }
 
+// Compare two values as text (used to spot a status that needs rewriting).
+function same(a, b) {
+  return (a === undefined || a === null ? '' : String(a)) === (b === undefined || b === null ? '' : String(b));
+}
+
 // Convert a value to a positive number (handles numeric strings, ignores
 // 'unlimited' strings and empty values used by subscriptions).
 function toNumeric(v) {

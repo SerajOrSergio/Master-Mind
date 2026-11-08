@@ -50,7 +50,7 @@ export const pageHtml = `
             <label class="mb-1 d-block fw-semibold">All Students (quick add):</label>
             <input type="text" id="studentQuickSearch" class="form-control mb-2" placeholder="Search students by name...">
             <div id="studentsQuickContainer" class="pill-container quick-students flex-wrap"></div>
-            <div class="text-muted small mt-2">A picked student fills the name, phone and grade — type the email by hand.</div>
+            <div class="text-muted small mt-2">A picked student fills the name, phone, email and grade from the students database.</div>
           </div>
         </div>
         <button type="submit" class="btn btn-primary w-100 w-md-auto">Add Study Click</button>

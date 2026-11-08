@@ -163,14 +163,15 @@ export function setupPastPapersPage(options: PastPapersPageOptions): void {
     pickerClear?.classList.remove('d-none');
     // Auto-fill what the students database already knows
     setValue('phoneNumber', s.phoneNumber || '');
+    setValue('emailAddress', s.email || '');
     setValue('curriculum', s.curriculum || '');
     selectedGrade = s.gradeLevel || '';
     document.querySelectorAll('#gradesContainer .grade-pill').forEach((p: any) => {
       p.classList.toggle('selected', p.dataset.grade === selectedGrade);
     });
     pickerList?.classList.add('d-none');
-    // Email + money are typed by hand — go straight to the email
-    input('emailAddress')?.focus();
+    // Money is typed by hand — go straight to the price
+    input('price')?.focus();
   }
 
   function clearStudentSelection() {
@@ -182,6 +183,7 @@ export function setupPastPapersPage(options: PastPapersPageOptions): void {
     }
     pickerClear?.classList.add('d-none');
     setValue('phoneNumber', '');
+    setValue('emailAddress', '');
     setValue('curriculum', '');
     selectedGrade = '';
     document.querySelectorAll('#gradesContainer .grade-pill').forEach(p => p.classList.remove('selected'));

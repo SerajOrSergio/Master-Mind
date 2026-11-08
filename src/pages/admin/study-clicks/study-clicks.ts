@@ -82,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
       phoneNumber: document.getElementById('phoneNumber').value.trim(),
       gradeLevel: selectedGrade,
       paidAmount: document.getElementById('paidAmount').value.trim() === '' ? null : Number(document.getElementById('paidAmount').value.trim()),
-      // Typed by hand on this form (students have no email on record)
+      // Auto-filled from the picked student, still editable here
       emailAddress: document.getElementById('emailAddress').value.trim(),
       // Manually entered paid date (falls back to today inside the API)
       dateCreated: document.getElementById('paidDate').value || todayLocalISO()
@@ -465,12 +465,13 @@ function renderQuickStudents(filter) {
 function quickFillStudent(s) {
     document.getElementById('studentName').value = s.studentName || '';
     document.getElementById('phoneNumber').value = s.phoneNumber || '';
+    document.getElementById('emailAddress').value = s.email || '';
     const grade = s.gradeLevel || '';
     document.querySelectorAll('#gradesContainer .grade-pill').forEach(p => {
       p.classList.toggle('selected', p.dataset.grade === grade);
     });
     selectedGrade = grade;
-    // Email is typed by hand, so jump to the one thing left: how much they paid
+    // Everything else is filled in — jump to the amount they paid
     document.getElementById('paidAmount').focus();
   }
 

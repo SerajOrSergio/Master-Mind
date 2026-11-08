@@ -39,7 +39,7 @@ export default function (app) {
     try {
       console.log('POST /api/students called with body:', req.body);
       let students = readJson(studentsFile, []);
-      const allowed = ['studentName', 'subjects', 'schoolName', 'curriculum', 'gradeLevel', 'notes', 'phoneNumber', 'parentName', 'parentPhone', 'discount'];
+      const allowed = ['studentName', 'subjects', 'schoolName', 'curriculum', 'gradeLevel', 'notes', 'email', 'phoneNumber', 'parentName', 'parentPhone', 'discount'];
       // Generate new unique id (reuse a provided id when free, so undo can
       // restore a deleted student with its original id)
       let newId = students.length ? Math.max(...students.map(s => s.id)) + 1 : 1;
@@ -86,7 +86,7 @@ export default function (app) {
       let students = readJson(studentsFile, []);
       const idx = students.findIndex(s => s.id === id);
       if (idx === -1) return res.status(404).json({ error: 'Student not found.' });
-      const allowed = ['studentName', 'subjects', 'schoolName', 'curriculum', 'gradeLevel', 'notes', 'phoneNumber', 'parentName', 'parentPhone', 'discount'];
+      const allowed = ['studentName', 'subjects', 'schoolName', 'curriculum', 'gradeLevel', 'notes', 'email', 'phoneNumber', 'parentName', 'parentPhone', 'discount'];
       for (const key of allowed) {
         if (key === 'discount') {
           // Remove if null, undefined, empty string, or not a valid number
