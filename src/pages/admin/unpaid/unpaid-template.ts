@@ -37,7 +37,7 @@ export const pageHtml = `
     <script type="module" src="/assist/page-boot.js" data-header="/src/components/admin/header/header.html" data-container="admin-header-container" data-undo-module="/assist/undo-manager.js" data-burger-module="/src/components/admin/header/header.js"></script>
     <script src="/src/pages/admin/payments/payments-grouping.js"></script>
     <script src="/src/pages/admin/unpaid/unpaid.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assist/pwa-register.js" defer></script>
     <script src="/assist/use-hostname.js" defer></script>
   </body>

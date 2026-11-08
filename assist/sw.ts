@@ -6,7 +6,7 @@
    - API calls are NEVER cached
    ============================================================ */
 
-const CACHE = 'mastermind-v9';
+const CACHE = 'mastermind-v10';
 
 const PRECACHE = [
   '/assist/manifest.json',

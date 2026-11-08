@@ -36,6 +36,7 @@ function admi_renderUnpaidPayments(unpaids) {
   // sections with a year divider — same dashboard layout as the Payments page.
   function buildCard(session) {
     const card = document.createElement('div');
+    card.dataset.sessionKey = [session.createdBy, session.date, session.subject, session.classroom, session.timeWindow].join('|');
     card.className = 'payment-card collapsed';
     const studentsCount = session.students ? session.students.length : 0;
     card.innerHTML = `

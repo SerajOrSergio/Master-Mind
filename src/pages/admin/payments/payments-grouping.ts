@@ -117,6 +117,11 @@
     try { localStorage.setItem(GROUP_STATE_KEY, JSON.stringify(state)); } catch (e) { /* private mode etc. */ }
   }
 
+  // Cards are re-rendered after every payment update (the row moves to its
+  // Paid/Partial/Unpaid page). Remember which session cards were open so the
+  // card someone is working in does not snap shut when they save a status.
+  const expandedCards = new Set();
+
   // attachMonthSections(listDiv, sessionList, buildCard, options)
   //   sessionList : array of session-like objects ({date, students, ...}) — order free
   //   buildCard   : (session) => HTMLElement (the .payment-card element for one form)
@@ -166,8 +171,8 @@
     yearBuckets.forEach((bucket, yearIdx) => {
       let monthHost = listDiv;
       if (bucket.year) {
-        // Every year starts expanded, so no older year is hidden on load.
-        const yearOpen = true;
+        // Years start expanded, and a manual collapse is remembered.
+        const yearOpen = groupState[bucket.year] !== false;
         const yearSection = document.createElement('section');
         yearSection.className = 'payments-year-section' + (yearOpen ? '' : ' collapsed');
         yearSection.dataset.year = bucket.year;
@@ -200,8 +205,9 @@
           '<span><i class="bi bi-people"></i> ' + pendingStudents +
           ' student' + (pendingStudents === 1 ? '' : 's') + '</span>';
       // Months start collapsed so the page opens as a clean overview of every
-      // month; clicking a month bar reveals its forms and actions.
-      const defaultOpen = false;
+      // month; once someone opens a month it stays open across re-renders and
+      // page loads, and an active search/filter opens every section.
+      const defaultOpen = forceOpenAll || groupState[monthKey] === true;
 
       const section = document.createElement('section');
       section.className = 'payments-group' + (defaultOpen ? '' : ' collapsed');
@@ -241,14 +247,19 @@
     const header = card.querySelector('.payment-card-header');
     const details = card.querySelector('.payment-card-details-area');
     const hideBtn = card.querySelector('.hide-btn');
-    let expanded = false;
+    const cardKey = card.dataset.sessionKey || '';
+    let expanded = cardKey ? expandedCards.has(cardKey) : false;
     function setState(expand) {
       expanded = expand;
       card.classList.toggle('collapsed', !expand);
       if (details) details.style.display = expand ? '' : 'none';
       if (hideBtn) hideBtn.textContent = expand ? 'Hide' : 'Show';
+      if (cardKey) {
+        if (expand) expandedCards.add(cardKey);
+        else expandedCards.delete(cardKey);
+      }
     }
-    setState(false);
+    setState(expanded);
     if (header) {
       header.addEventListener('click', e => {
         if (e.target.closest('.delete-btn')) return;

@@ -269,6 +269,7 @@ function renderPayments(sessions, payments) {
     // Patch each student's phone with latest from studentsDb if available
     // Phone number is now always patched by backend; no need to patch here.
     const card = document.createElement('div');
+    card.dataset.sessionKey = [session.createdBy, session.date, session.subject, session.classroom, session.timeWindow].join('|');
     card.className = 'payment-card collapsed';
     let durationStr = '';
     if (session.timeWindow) {
@@ -426,32 +427,9 @@ function renderPayments(sessions, payments) {
         </div>
       </div>
     `;
-    // Toggle expand/collapse (reuse logic)
-    const header = card.querySelector('.payment-card-header');
-    const details = card.querySelector('.payment-card-details-area');
-    const hideBtn = card.querySelector('.hide-btn');
-    let expanded = false;
-    function setState(expand) {
-      expanded = expand;
-      if (expand) {
-        card.classList.remove('collapsed');
-        details.style.display = '';
-        hideBtn.textContent = 'Hide';
-      } else {
-        card.classList.add('collapsed');
-        details.style.display = 'none';
-        hideBtn.textContent = 'Show';
-      }
-    }
-    setState(false);
-    header.addEventListener('click', e => {
-      if (e.target.classList.contains('delete-btn')) return;
-      setState(!expanded);
-    });
-    hideBtn.addEventListener('click', e => {
-      e.stopPropagation();
-      setState(!expanded);
-    });
+    // Toggle expand/collapse — the shared helper also remembers that this
+    // session card was open, so a payment update does not snap it shut.
+    PaymentGroups.attachCardToggle(card);
     // Delete button logic (delete all payments for this session)
     const deleteBtn = card.querySelector('.delete-btn');
     deleteBtn.addEventListener('click', async (e) => {

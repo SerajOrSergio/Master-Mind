@@ -16,7 +16,7 @@ export const pageHtml = `
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>Payments | Admin Portal</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" media="print" onload="this.media='all'">
+    <link href="/bootstrap-5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="/src/pages/admin/payments/payments.css">
     <link rel="stylesheet" href="/src/components/admin/sidebar-menu/sidebar.css">
@@ -63,7 +63,7 @@ export const pageHtml = `
     <script type="module" src="/assist/page-boot.js" data-header="/src/components/admin/header/header.html" data-container="admin-header-container" data-undo-module="/assist/undo-manager.js" data-burger-module="/src/components/admin/header/header.js"></script>
     <script type="module" src="/src/pages/admin/payments/payments.js"></script>
     <!-- Bootstrap 5 JS for offcanvas menu toggle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assist/pwa-register.js" defer></script>
     <script src="/assist/use-hostname.js" defer></script>
   </body>

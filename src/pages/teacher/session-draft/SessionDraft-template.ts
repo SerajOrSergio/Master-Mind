@@ -58,7 +58,7 @@ export const pageHtml = `
   </div>
   
   <!-- Scripts -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/src/components/teacher/sidebar/sidebar-loader.js"></script>
   <script src="/src/components/teacher/header/header-loader.js"></script>
   

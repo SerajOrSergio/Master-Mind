@@ -32,6 +32,9 @@
     fetch('/api/settings/dark-mode')
       .then(res => res.json())
       .then(data => {
+        // Cache the setting so the page generator's boot snippet can paint the
+        // correct theme immediately on the next navigation (no old-theme flash).
+        try { localStorage.setItem('mm-dark-mode', data.darkMode ? '1' : '0'); } catch (e) {}
         if (data.darkMode) {
           document.body.classList.add('dark-mode');
           document.body.classList.add('gradient-glassmorphism');

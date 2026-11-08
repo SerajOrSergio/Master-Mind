@@ -77,6 +77,7 @@ async function admi_renderPartialPayments(partials) {
       }
     }
     const card = document.createElement('div');
+    card.dataset.sessionKey = [session.createdBy, session.date, session.subject, session.classroom, session.timeWindow].join('|');
     card.className = 'payment-card collapsed';
     const studentsCount = session.students ? session.students.length : 0;
     const timeText = session.timeWindow ? `${session.timeWindow}${durationStr ? ' · ' + durationStr : ''}` : '-';

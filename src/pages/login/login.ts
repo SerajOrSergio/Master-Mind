@@ -10,6 +10,15 @@ let pendingTeacherUsername = '';
 // (or any device) doesn't require re-authentication every time it opens.
 const SESSION_KEY = 'mastermind_session';
 
+// Warm the theme cache before the user reaches a portal page, so the first
+// navigation paints the 2.0 theme immediately instead of flashing the old one.
+fetch('/api/settings/dark-mode')
+  .then(res => res.json())
+  .then(data => {
+    try { localStorage.setItem('mm-dark-mode', data.darkMode ? '1' : '0'); } catch (e) { /* ignore */ }
+  })
+  .catch(() => { /* offline / not logged in — the portal loader will retry */ });
+
 function saveSession(session) {
   try {
     session.loginAt = Date.now();

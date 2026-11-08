@@ -38,7 +38,7 @@ export const pageHtml = `
     <script src="/src/pages/admin/payments/payments-grouping.js"></script>
     <script src="partial.js"></script>
     <!-- Bootstrap 5 JS for offcanvas menu toggle -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="/bootstrap-5.0.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="/assist/pwa-register.js" defer></script>
     <script src="/assist/use-hostname.js" defer></script>
   </body>

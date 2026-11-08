@@ -232,6 +232,11 @@ function saveGroupExpandedState(state) {
   try { localStorage.setItem(GROUP_STATE_KEY, JSON.stringify(state)); } catch (e) { /* private mode etc. */ }
 }
 
+// Cards are rebuilt after every payment update (the priced row moves to its
+// Paid/Partial/Unpaid page). Remember which session cards were open so saving
+// a status never snaps the card shut while someone is working in it.
+const adm_payments_expandedCards = new Set<string>();
+
 // Length of a session window in hours (first slot -> last slot, overnight safe).
 function hoursFromTimeWindow(windowStr) {
   const times = String(windowStr || '').split('-').map(t => t.trim()).filter(Boolean);
@@ -393,8 +398,8 @@ function renderPayments(sessions, payments) {
   yearBuckets.forEach((bucket, yearIdx) => {
     let monthHost = listDiv;
     if (bucket.year) {
-      // Every year starts expanded so older history is never hidden.
-      const yearOpen = true;
+      // Years start expanded, and a manual collapse is remembered.
+      const yearOpen = groupState[bucket.year] !== false;
       const yearSection = document.createElement('section');
       yearSection.className = 'payments-year-section' + (yearOpen ? '' : ' collapsed');
       yearSection.dataset.year = bucket.year;
@@ -436,9 +441,10 @@ function renderPayments(sessions, payments) {
       return total + students.filter(isNewPaymentRow).length;
     }, 0);
 
-    // Months start collapsed so the page opens as a clean overview; clicking
-    // a month bar reveals its forms and actions.
-    const defaultOpen = false;
+    // Months start collapsed so the page opens as a clean overview; once a
+    // month is opened it stays open across re-renders and page loads, and an
+    // active search/filter opens every section.
+    const defaultOpen = !!filtersActive || groupState[monthKey] === true;
 
     const section = document.createElement('section');
     section.className = 'payments-group' + (defaultOpen ? '' : ' collapsed');
@@ -482,7 +488,10 @@ function renderPayments(sessions, payments) {
     // Patch each student's phone with latest from studentsDb if available
     // Phone number is now always patched by backend; no need to patch here.
     const card = document.createElement('div');
-    card.className = 'payment-card collapsed';
+    const sessionKey = [session.createdBy, session.date, session.subject, session.classroom, session.timeWindow].join('|');
+    card.dataset.sessionKey = sessionKey;
+    const startExpanded = adm_payments_expandedCards.has(sessionKey);
+    card.className = 'payment-card' + (startExpanded ? '' : ' collapsed');
     let durationStr = '';
     if (session.timeWindow) {
       const times = session.timeWindow.split(' - ').map(t => t.trim()).filter(Boolean);
@@ -640,20 +649,22 @@ function renderPayments(sessions, payments) {
     const header = card.querySelector('.payment-card-header');
     const details = card.querySelector('.payment-card-details-area');
     const hideBtn = card.querySelector('.hide-btn');
-    let expanded = false;
+    let expanded = startExpanded;
     function setState(expand) {
       expanded = expand;
       if (expand) {
         card.classList.remove('collapsed');
         details.style.display = '';
         hideBtn.textContent = 'Hide';
+        adm_payments_expandedCards.add(sessionKey);
       } else {
         card.classList.add('collapsed');
         details.style.display = 'none';
         hideBtn.textContent = 'Show';
+        adm_payments_expandedCards.delete(sessionKey);
       }
     }
-    setState(false);
+    setState(startExpanded);
     header.addEventListener('click', e => {
       if (e.target.classList.contains('delete-btn')) return;
       setState(!expanded);
