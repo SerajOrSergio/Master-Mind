@@ -898,6 +898,41 @@ export const css = `
     margin-right: 4px;
   }
   
+  /* Subscription breakdown under the salary table (admin Paid page) */
+  .ts-sub-block {
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px dashed #e9ecef;
+  }
+  
+  .ts-sub-heading {
+    font-weight: 700;
+    color: #495057;
+    font-size: 0.95rem;
+    margin-bottom: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  
+  .ts-sub-heading i {
+    color: #6C4DF6;
+    margin-right: 2px;
+  }
+  
+  .ts-sub-table {
+    font-size: 13px;
+  }
+  
+  body.dark-mode.gradient-glassmorphism .ts-sub-block {
+    border-top-color: #E8E0D3;
+  }
+  
+  body.dark-mode.gradient-glassmorphism .ts-sub-heading {
+    color: #1C1814;
+  }
+  
   /* per-row Mark Completed button next to CEO Profit */
   .ts-action-cell {
     white-space: nowrap;

@@ -126,20 +126,35 @@ function adm_paid_subscriptionPrice(sub, payment) {
   return null;
 }
 
+// A package is sold either in classes ("10 classes for 500") or in hours
+// ("10 hours for 500"), which is what the subscription Type field records.
+function adm_paid_isHoursPlan(sub) {
+  return String(sub && sub.type ? sub.type : '').trim().toLowerCase() === 'hours';
+}
+
 // What one session is worth out of the student's package, or null when the
 // package has no numeric price / size (e.g. an 'unlimited' plan) — those rows
 // are flagged on the card instead of being silently counted as zero.
-function adm_paid_subscriptionValue(payment, session, priceInfo) {
+//   classes plan: price ÷ classes × 1 class      (one session row = one class)
+//   hours plan:   price ÷ hours   × hours taken
+// so 10 classes for 500, of which the student took 5, uses 5 × 50 = 250 of
+// the package — the teacher's cut is then taken from that 250.
+function adm_paid_subscriptionValue(payment, session, priceInfo, sub) {
   if (!priceInfo || !priceInfo.price || !priceInfo.packageAmount) return null;
   const hours = adm_paid_sessionHours(payment, session);
-  if (!hours) return null;
+  const hoursPlan = adm_paid_isHoursPlan(sub);
+  const units = hoursPlan ? hours : 1;
+  if (!units) return null;
   const unitPrice = priceInfo.price / priceInfo.packageAmount;
   return {
     price: priceInfo.price,
     packageAmount: priceInfo.packageAmount,
     unitPrice,
     hours,
-    value: adm_paid_round2(unitPrice * hours)
+    classes: hoursPlan ? 0 : 1,
+    unitLabel: hoursPlan ? 'hour' : 'class',
+    units,
+    value: adm_paid_round2(unitPrice * units)
   };
 }
 
@@ -151,7 +166,7 @@ function adm_paid_rowMoney(payment, session, subscriptions) {
   const paid = adm_paid_round2(payment && payment.amount);
   const sub = adm_paid_findSubscription(subscriptions, payment && payment.studentName, session && session.subject);
   const priceInfo = adm_paid_subscriptionPrice(sub, payment);
-  const subValue = paid === 0 ? adm_paid_subscriptionValue(payment, session, priceInfo) : null;
+  const subValue = paid === 0 ? adm_paid_subscriptionValue(payment, session, priceInfo, sub) : null;
   return {
     paid,
     sub,
@@ -163,7 +178,7 @@ function adm_paid_rowMoney(payment, session, subscriptions) {
 
 // STATEMENT / SUB. VALUE tooltip: the exact sum behind a subscriber's session.
 function adm_paid_subValueBreakdown(v) {
-  return `${v.price} ÷ ${v.packageAmount} = ${adm_paid_round2(v.unitPrice)} per class × ${v.hours}h taken = ${v.value}`;
+  return `${v.price} ÷ ${v.packageAmount} = ${adm_paid_round2(v.unitPrice)} per ${v.unitLabel} × ${v.units} ${v.unitLabel}${v.units === 1 ? '' : 's'} taken = ${v.value}`;
 }
 
 // SUB. VALUE cell: the package money this row contributes, with its sum shown
@@ -172,7 +187,7 @@ function adm_paid_subValueCellHtml(row) {
   if (row.subValue) {
     const v = row.subValue;
     return `<span class="text-primary fw-semibold" title="${adm_paid_escapeHtmlText(adm_paid_subValueBreakdown(v))}">${v.value}</span>` +
-      `<div class="text-muted" style="font-size:11px;">${adm_paid_escapeHtmlText(v.price + '/' + v.packageAmount)} × ${v.hours}h</div>`;
+      `<div class="text-muted" style="font-size:11px;">${adm_paid_escapeHtmlText(v.price + '/' + v.packageAmount)} × ${v.units} ${adm_paid_escapeHtmlText(v.unitLabel)}</div>`;
   }
   if (row.price) {
     return '<span class="text-warning" title="The subscription price is linked, but the package has no number of classes, so one session cannot be valued. Set the package amount on the Subscription page."><i class="bi bi-exclamation-triangle-fill"></i> set classes</span>';
@@ -583,6 +598,61 @@ async function adm_paid_renderPaidPayments(paids, summarySessions?: any) {
 }
 
 
+// —— Subscription breakdown ——
+// One line per student + subject plan inside the filtered sessions: what was
+// paid up-front, what package it bought, how much of that package this view
+// used, and what those units were worth. A student subscribed to two subjects
+// gets one line per subject, and a plan shared by several sessions shows its
+// price once — never once per session.
+function adm_paid_subscriptionRows(sessions, teachersData) {
+  const groups = new Map();
+  (sessions || []).forEach(session => {
+    const teacher = findTeacherByName(teachersData, session.createdBy || session.teacherName);
+    const rate = teacher && teacher.cutRate !== undefined && teacher.cutRate !== '' && teacher.cutRate !== null
+      ? Number(teacher.cutRate) : null;
+    (session.students || []).forEach(student => {
+      const money = adm_paid_rowMoney(student, session, adm_paid_subscriptionData);
+      const sub = money.sub;
+      if (!sub) return;
+      const hoursPlan = adm_paid_isHoursPlan(sub);
+      const id = sub.id !== undefined && sub.id !== null && String(sub.id) !== ''
+        ? 'id:' + String(sub.id)
+        : 'name:' + String(sub.studentFullName || student.studentName || '').trim().toLowerCase();
+      const key = id + '|' + String(sub.subject || '').trim().toLowerCase();
+      if (!groups.has(key)) {
+        groups.set(key, {
+          name: sub.studentFullName || student.studentName || 'Unknown student',
+          subject: String(sub.subject || '').trim(),
+          type: String(sub.type || 'unlimited').trim() || 'unlimited',
+          usage: String(sub.usage || '').trim(),
+          price: money.price ? money.price.price : null,
+          packageAmount: money.price ? money.price.packageAmount : null,
+          unitLabel: hoursPlan ? 'hour' : 'class',
+          classes: 0,
+          hours: 0,
+          value: 0,
+          teacherProfit: 0,
+          ceoProfit: 0
+        });
+      }
+      const g = groups.get(key);
+      if (!g.price && money.price) { g.price = money.price.price; g.packageAmount = money.price.packageAmount; }
+      if (hoursPlan) g.hours = adm_paid_round2(g.hours + adm_paid_sessionHours(student, session));
+      else g.classes += 1;
+      const value = money.subValue ? money.subValue.value : 0;
+      g.value = adm_paid_round2(g.value + value);
+      if (rate !== null) {
+        const profit = Math.round((value * rate) / 100);
+        g.teacherProfit += profit;
+        g.ceoProfit += value - profit;
+      }
+    });
+  });
+  return [...groups.values()]
+    .map(g => { g.ceoProfit = adm_paid_round2(g.ceoProfit); return g; })
+    .sort((a, b) => a.name.localeCompare(b.name) || a.subject.localeCompare(b.subject));
+}
+
 // —— Teacher quick summary panel ——
 // Shown whenever a filter/search is active on the Paid page. One teacher in
 // the results → a per-month salary breakdown (total paid, cut rate, teacher
@@ -687,6 +757,66 @@ async function renderTeacherSummary(sessions) {
       .filter(Boolean).join(' → ');
     const pending = sessions.filter(s => !isSessionCompleted(s));
 
+    // Subscribed students line-by-line: subject, plan type, amount, package and
+    // the part of it this filter used, so subscriptions sit next to the cash
+    // rows instead of hiding behind one SUBSCRIPTION VALUE total.
+    const subRows = adm_paid_subscriptionRows(sessions, teachersData);
+    const subTotals = subRows.reduce((acc, g) => {
+      if (g.price) acc.price += g.price;
+      acc.value = adm_paid_round2(acc.value + g.value);
+      acc.teacherProfit += g.teacherProfit;
+      acc.ceoProfit = adm_paid_round2(acc.ceoProfit + g.ceoProfit);
+      return acc;
+    }, { price: 0, value: 0, teacherProfit: 0, ceoProfit: 0 });
+    const subTableHtml = subRows.length
+      ? '<div class="ts-sub-block">' +
+          '<div class="ts-sub-heading"><i class="bi bi-card-checklist"></i> Subscriptions in this view ' +
+            '<span class="ts-badge ts-badge-ok">' + subRows.length + ' plan' + (subRows.length === 1 ? '' : 's') + '</span>' +
+            (subTotals.price ? ' <span class="ts-badge ts-badge-mixed">' + subTotals.price + ' paid up-front</span>' : '') +
+          '</div>' +
+          '<div class="table-responsive"><table class="table table-sm table-bordered align-middle mb-0 ts-table ts-sub-table">' +
+            '<thead><tr>' +
+              '<th>STUDENT</th><th>SUBJECT</th><th class="text-center">CLASS TYPE</th>' +
+              '<th class="text-end">AMOUNT PAID</th><th class="text-end">PACKAGE</th>' +
+              '<th class="text-center">TAKEN IN FILTER</th>' +
+              '<th class="text-end">VALUE USED</th>' +
+              '<th class="text-end">TEACHER</th><th class="text-end">CEO</th>' +
+            '</tr></thead>' +
+            '<tbody>' + subRows.map(function (g) {
+              const typeLabel = g.type === 'hours' ? 'Hours' : g.type === 'classes' ? 'Classes' : adm_paid_escapeHtmlText(g.type);
+              const packageText = (g.packageAmount
+                ? g.packageAmount + ' ' + g.unitLabel + (g.packageAmount === 1 ? '' : 's')
+                : 'unlimited') + (g.usage ? ' · ' + g.usage + ' used' : '');
+              const takenText = g.unitLabel === 'hour'
+                ? adm_paid_round2(g.hours) + ' h'
+                : g.classes + ' class' + (g.classes === 1 ? '' : 'es');
+              const amountText = g.price
+                ? String(g.price)
+                : '<span class="ts-badge ts-badge-warn">no price</span>';
+              return '<tr>' +
+                '<td class="ts-row-name">' + adm_paid_escapeHtmlText(g.name) + '</td>' +
+                '<td>' + (g.subject ? adm_paid_escapeHtmlText(g.subject) : '<span class="text-muted fst-italic">All subjects</span>') + '</td>' +
+                '<td class="text-center"><span class="ts-badge ts-badge-mixed">' + typeLabel + '</span></td>' +
+                '<td class="text-end fw-semibold">' + amountText + '</td>' +
+                '<td class="text-end">' + adm_paid_escapeHtmlText(packageText) + '</td>' +
+                '<td class="text-center">' + adm_paid_escapeHtmlText(takenText) + '</td>' +
+                '<td class="text-end text-primary fw-semibold">' + g.value + '</td>' +
+                '<td class="text-end text-success fw-semibold">' + g.teacherProfit + '</td>' +
+                '<td class="text-end ts-ceo-cell">' + g.ceoProfit + '</td>' +
+                '</tr>';
+            }).join('') + '</tbody>' +
+            '<tfoot><tr>' +
+              '<td colspan="3">Total subscriptions</td>' +
+              '<td class="text-end">' + subTotals.price + '</td>' +
+              '<td></td><td></td>' +
+              '<td class="text-end">' + subTotals.value + '</td>' +
+              '<td class="text-end">' + subTotals.teacherProfit + '</td>' +
+              '<td class="text-end ts-ceo-cell ts-ceo-total">' + subTotals.ceoProfit + '</td>' +
+            '</tr></tfoot>' +
+          '</table></div>' +
+        '</div>'
+      : '';
+
     const rateCell = cutRate === null
       ? notFound
         ? '<span class="ts-badge ts-badge-warn" title="Teacher not found in the teachers list"><i class="bi bi-exclamation-triangle-fill"></i> not in list</span>'
@@ -706,6 +836,7 @@ async function renderTeacherSummary(sessions) {
               totals.sessions + ' session form' + (totals.sessions === 1 ? '' : 's') +
               ' · ' + totals.students + ' student payment' + (totals.students === 1 ? '' : 's') +
               (totals.subscriptionValue ? ' · Subscription value ' + adm_paid_round2(totals.subscriptionValue) : '') +
+              (subRows.length ? ' · ' + subRows.length + ' subscription plan' + (subRows.length === 1 ? '' : 's') : '') +
               (searchText ? ' · Search: "' + adm_paid_escapeHtmlText(searchText) + '"' : '') +
               (monthRange ? ' · ' + adm_paid_escapeHtmlText(monthRange) : '') +
               (singleTeacher && summaryTeacher ? ' · Cut rate ' + rateCell + ' (from the Teachers page)' : '') +
@@ -755,7 +886,8 @@ async function renderTeacherSummary(sessions) {
             '<td></td>' +
           '</tr></tfoot>' +
         '</table></div>' +
-        '<div class="ts-footnote"><i class="bi bi-info-circle"></i> Subscribers pay up-front, so their sessions are valued as <strong>package price ÷ number of classes × hours taken</strong> and shown as SUBSCRIPTION VALUE. ' +
+        subTableHtml +
+        '<div class="ts-footnote"><i class="bi bi-info-circle"></i> Subscribers pay up-front, so their sessions are valued out of the package: <strong>classes plan = price ÷ classes</strong> (one session form row = one class) and <strong>hours plan = price ÷ hours × hours taken</strong>, shown as SUBSCRIPTION VALUE and in the Subscriptions table above. ' +
         'Teacher Earnings = (Total Paid + Subscription Value) × Cut Rate % (same session-by-session maths as each form). ' +
         'CEO Profit is what stays with you after paying the teacher. ' +
         'The <strong>Mark Completed</strong> button on each row records that that month\'s teacher share was paid — undo works too.</div>' +
