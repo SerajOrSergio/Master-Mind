@@ -403,9 +403,17 @@ router.post('/save-session-attendance', (req, res) => {
         if (!payments[paymentIdx].sessionId) payments[paymentIdx].sessionId = sessionId;
         // Update hours and other fields if needed
         payments[paymentIdx].hours = s.hours || 0;
-        payments[paymentIdx].amount = subAmount;
         payments[paymentIdx].discount = discount;
-        payments[paymentIdx].priceTag = subPriceTag;
+        // The session form has no price fields: it always sends 0/0 for a
+        // non-subscribed student. Never let a re-save wipe a price tag or an
+        // amount that the office already entered on the Payments page.
+        if (hasSubscription) {
+          payments[paymentIdx].priceTag = subPriceTag;
+          payments[paymentIdx].amount = subAmount;
+        } else {
+          if (!(Number(payments[paymentIdx].priceTag) > 0)) payments[paymentIdx].priceTag = subPriceTag;
+          if (!(Number(payments[paymentIdx].amount) > 0)) payments[paymentIdx].amount = subAmount;
+        }
         payments[paymentIdx].note = s.note || payments[paymentIdx].note;
         // Set unconditionally so a reverted cell (back to a plain number)
         // clears the old statement instead of leaving stale text behind.

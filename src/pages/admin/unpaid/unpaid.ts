@@ -60,6 +60,7 @@ function admi_renderUnpaidPayments(unpaids) {
         </div>
         <div class="payment-card-header-actions">
           <span class="hide-btn">Show</span>
+          <button class="delete-btn">Delete</button>
         </div>
       </div>
       <div class="payment-card-details-area" style="display:none;">
@@ -171,6 +172,41 @@ function admi_renderUnpaidPayments(unpaids) {
       });
     }, 0);
     PaymentGroups.attachCardToggle(card);
+    // Delete this old unpaid session form (all its unpaid rows), with undo
+    // support so an accidental click can be reverted from the header.
+    const deleteBtn = card.querySelector('.delete-btn');
+    if (deleteBtn) {
+      deleteBtn.addEventListener('click', async (e) => {
+        e.stopPropagation();
+        const deletedPayments = (session.students || []).map(s => ({ ...s }));
+        if (!deletedPayments.length) return;
+        // Remember where the card sat in payments.json so Undo restores it in
+        // the same place instead of at the bottom of the list.
+        const allPayments = await (await fetch('/database/teacher-portal/payments.json', { cache: 'no-store' })).json();
+        const firstPaymentIdx = allPayments.findIndex(p => String(p.id) === String(deletedPayments[0].id));
+        for (const p of deletedPayments) {
+          await fetch('/api/delete-payment', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ paymentId: p.id })
+          });
+        }
+        if (window.pushAction && window.createCustomAction) {
+          window.pushAction(window.createCustomAction('delete', async () => {
+            for (let i = 0; i < deletedPayments.length; i++) {
+              const restoreIndex = firstPaymentIdx >= 0 ? firstPaymentIdx + i : undefined;
+              await fetch('/api/payments', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ ...deletedPayments[i], _restoreIndex: restoreIndex })
+              });
+            }
+            await admi_loadUnpaidPayments();
+          }));
+        }
+        await admi_loadUnpaidPayments();
+      });
+    }
     return card;
   }
   // Month sections: newest on top, year dividers, remembered expand/collapse
@@ -194,12 +230,9 @@ async function admi_loadUnpaidPayments() {
       p.discount = student.discount;
     }
   });
-  // A row only belongs on Unpaid once a price tag (or some money) has been set.
-  // Brand-new session rows with neither belong on the Payments intake page.
-  const unpaids = payments.filter(p => {
-    if (String(p.status || '').trim().toLowerCase() !== 'unpaid') return false;
-    return (Number(p.priceTag) || 0) > 0 || (Number(p.amount) || 0) > 0;
-  });
+  // The status is the only thing that decides the page; never-assigned rows
+  // stay on the Payments intake page until the office clicks Unpaid.
+  const unpaids = payments.filter(p => String(p.status || '').trim().toLowerCase() === 'unpaid');
   admi_renderUnpaidPayments(unpaids);
 }
 

@@ -70,16 +70,15 @@ async function rec_payments_fetchJson(url) {
   return await res.json();
 }
 
-// New session-form rows waiting for the receptionist/admin to set a price.
-// Rows that already have money or a settled status belong to the Paid, Partial
-// or Unpaid page instead, so the Payments page stays the intake worklist.
+// New session-form rows waiting for the office to set a price.
+// Only an explicit status assignment moves a row off this page: a row stays in
+// the intake worklist until someone clicks Paid / Partial / Unpaid (or
+// subscribes the student). Typing a price tag or amount alone must never make
+// the other students on the form disappear.
 function isNewPaymentRow(row) {
   if (!row) return false;
   const status = String(row.status || '').trim().toLowerCase();
-  if (status === 'paid' || status === 'partial') return false;
-  const priceTag = Number(row.priceTag) || 0;
-  const amount = Number(row.amount) || 0;
-  return priceTag <= 0 && amount <= 0;
+  return status === '' || status === 'pending';
 }
 
 // Fetch subscriptions once and cache
@@ -222,8 +221,8 @@ function renderPayments(sessions, payments) {
     }
     sessionMap[key].students.push(payment);
   });
-  // Only forms that still contain a brand-new row (no price tag and no amount)
-  // stay on this page. Paid / Partial / Unpaid rows live on their own pages.
+  // Only forms that still contain a row the office has not assigned yet stay
+  // on this page. Paid / Partial / Unpaid rows live on their own pages.
   const sessionList = Object.values(sessionMap as { [key: string]: any }).filter(session =>
     session.students.some(isNewPaymentRow)
   );

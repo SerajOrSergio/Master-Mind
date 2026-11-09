@@ -38,7 +38,7 @@
     "priceTag": "500",
     "type": "classes",
     "issueDate": "2026-05-04",
-    "usage": "5/8",
+    "usage": "6/8",
     "packageAmount": 8
   },
   {
@@ -214,7 +214,7 @@
     "type": "unlimited",
     "amount": "unlimited",
     "issueDate": "2026-09-27T16:09:42.943Z",
-    "usage": "13/unlimited",
+    "usage": "14/unlimited",
     "expirationDate": ""
   },
   {
@@ -294,7 +294,7 @@
     "type": "classes",
     "amount": 550,
     "issueDate": "2026-11-04T16:19:35.508Z",
-    "usage": "1/8",
+    "usage": "2/8",
     "expirationDate": "",
     "subject": "",
     "id": 1793809192947

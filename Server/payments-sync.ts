@@ -26,9 +26,10 @@ import { dbDir } from './paths';
    applyPaymentStatuses() keeps the payments on exactly one page: the
    Paid / Partial / Unpaid pages each read payments.json and filter by
    the stored status, so the status has to obey one rule for everyone
-   (see derivePaymentStatus below). Rows saved as 'Pending' used to
-   match no page at all and rows with amount === priceTag could sit in
-   Unpaid; this rewrites them to their real bucket.
+   (see derivePaymentStatus below). A row keeps the bucket the office
+   assigned to it. Rows that were never assigned ('Pending') stay on the
+   Payments intake page: typing a price tag or an amount must never move
+   a row to Partial/Unpaid on its own.
 
    All three are pure (no I/O) so they can be tested directly;
    syncPaymentsWithStudents() applies them to the files and writes
@@ -118,11 +119,6 @@ export function applyTeacherCutRatesToPayments(payments, teachers) {
   return changed;
 }
 
-function numberOrZero(value) {
-  const n = Number(value);
-  return isNaN(n) ? 0 : n;
-}
-
 // Lookup index for "this student has a subscription" — matched by student id
 // first, then by normalized full name (subscription.json stores both).
 export function subscriptionIndex(subscriptions) {
@@ -148,20 +144,25 @@ export function isSubscribedPayment(payment, index) {
 }
 
 // The single rule every payment page buckets by:
-//   Paid    — already marked Paid (manual mark or subscription), or the
-//             student holds a subscription, or the amount covers the price tag
-//             (price tag and amount are the same price)
-//   Partial — something was collected, but it is not the full price tag
-//   Unpaid  — nothing collected yet (amount 0 / empty / not a number)
+//   Paid / Partial / Unpaid — the bucket the office assigned by clicking a
+//             status button (or by subscribing the student). It is never
+//             re-derived from the numbers, so typing a price tag or an amount
+//             cannot pull a row out of the Payments page behind the user's back.
+//   Pending — never assigned yet; the row is still in the Payments intake list.
+//   A row whose student holds a subscription counts as Paid (already settled
+//   when the package was bought).
 export function derivePaymentStatus(payment, index) {
-  if (!payment) return 'Unpaid';
-  const priceTag = numberOrZero(payment.priceTag);
-  const amount = numberOrZero(payment.amount);
-  if (asText(payment.status).trim().toLowerCase() === 'paid') return 'Paid';
+  if (!payment) return 'Pending';
+  const status = asText(payment.status).trim().toLowerCase();
+  if (status === 'paid') return 'Paid';
   if (isSubscribedPayment(payment, index)) return 'Paid';
-  if (priceTag > 0 && amount > 0 && amount >= priceTag) return 'Paid';
-  if (amount > 0) return 'Partial';
-  return 'Unpaid';
+  // Nothing priced and nothing collected: this row was never assigned by
+  // hand (an old sync may have written Partial/Unpaid from the numbers alone).
+  // Send it back to the Payments intake page where it can be priced.
+  if (!(Number(payment.priceTag) > 0) && !(Number(payment.amount) > 0)) return 'Pending';
+  if (status === 'partial') return 'Partial';
+  if (status === 'unpaid') return 'Unpaid';
+  return 'Pending';
 }
 
 // —— Subscription price link ——
